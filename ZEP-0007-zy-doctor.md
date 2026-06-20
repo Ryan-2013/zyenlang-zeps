@@ -7,7 +7,7 @@
 | **ZEP** | 0007 |
 | **Title** | `zy doctor`: System Health Check |
 | **Author** | zuenchen, Claude Opus 4.7 |
-| **Status** | Draft |
+| **Status** | Active |
 | **Type** | Standards |
 | **Created** | 2026-06-20 |
 | **Post-History** | 2026-06-20 |
@@ -257,19 +257,28 @@ explicitly call `zy doctor`. No such script exists today.
 
 ## Reference implementation
 
-To be added once ZEP-0007 is implemented:
+Shipped in `zyenlang-v0.1.49` on 2026-06-20:
 
-- `zyenlang/cli/doctor.py` — main entry point, output formatter
+- `zyenlang/cli/__init__.py` — package marker.
 - `zyenlang/cli/doctor_checks.py` — one function per check ID, each
   returning a `CheckResult` dataclass (id, category, status, detail,
-  fix)
-- `zyenlang/__main__.py` — wires `zy doctor` as a subcommand
-- `tests/test_doctor_python.py` — Python-level unit tests that
-  fabricate broken environments and assert the right checks fail
+  fix). 16 checks total (5 environment, 5 installation, 3
+  configuration, 3 runtime).
+- `zyenlang/cli/doctor.py` — entry point, human and JSON formatters,
+  exit-code mapper. Also runnable directly via
+  `python -m zyenlang.cli.doctor`.
+- `zyenlang/transpiler.py` — `main()` wires `doctor` as a subcommand
+  via `cli.doctor.add_subparser(sub)` and dispatches with
+  `cli.doctor.handle(args)` before the existing input-file path.
+- `tests/test_doctor_python.py` — five smoke tests asserting the JSON
+  envelope shape, the full set of required check IDs (with and
+  without `--no-runtime`), per-check well-formedness, and exit-code
+  consistency with the summary counts.
 
-The fixtures should include at least: missing gcc, mirror drift,
-wrong Python version (mocked), and an intentionally broken smoke
-program (to verify the smoke check itself fails noisily).
+Open follow-up: the test suite is "shape-checks the output," not
+"fabricate broken environments and assert the right checks fail." A
+richer fixture suite that mocks subprocess and importlib would
+strengthen regression coverage. Tracked as a follow-up ZEP if needed.
 
 ## Open questions
 

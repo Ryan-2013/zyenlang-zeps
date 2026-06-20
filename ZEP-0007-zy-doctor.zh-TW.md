@@ -7,7 +7,7 @@
 | **ZEP** | 0007 |
 | **Title** | `zy doctor`: System Health Check |
 | **Author** | zuenchen, Claude Opus 4.7 |
-| **Status** | Draft |
+| **Status** | Active |
 | **Type** | Standards |
 | **Created** | 2026-06-20 |
 | **Post-History** | 2026-06-20 |
@@ -234,17 +234,24 @@ Exit code 政策(0 / 1 / 2)是新的,但只影響明確呼叫 `zy doctor` 的腳
 
 ## 參考實作
 
-ZEP-0007 實作後補上:
+於 2026-06-20 在 `zyenlang-v0.1.49` shipped:
 
-- `zyenlang/cli/doctor.py` —— 主入口、輸出格式化器
+- `zyenlang/cli/__init__.py` —— package marker。
 - `zyenlang/cli/doctor_checks.py` —— 每個 check ID 一個函式,各自回傳
-  `CheckResult` dataclass(id、category、status、detail、fix)
-- `zyenlang/__main__.py` —— 把 `zy doctor` 接成子指令
-- `tests/test_doctor_python.py` —— Python 層 unit test,模擬壞掉的環境
-  並斷言正確的檢查項失敗
+  `CheckResult` dataclass(id、category、status、detail、fix)。共 16 個
+  檢查(5 environment、5 installation、3 configuration、3 runtime)。
+- `zyenlang/cli/doctor.py` —— 入口、人類版與 JSON 格式化器、exit code
+  對映。也可以直接 `python -m zyenlang.cli.doctor`。
+- `zyenlang/transpiler.py` —— `main()` 透過
+  `cli.doctor.add_subparser(sub)` 接 `doctor` 子指令,並在既有 input-file
+  路徑前用 `cli.doctor.handle(args)` dispatch。
+- `tests/test_doctor_python.py` —— 五個 smoke test,驗證 JSON envelope
+  形狀、必要 check ID 完整集合(有與沒有 `--no-runtime` 兩種)、每筆檢查
+  結構完整,以及 exit code 與 summary 一致。
 
-Fixture 至少要包含:gcc 缺失、mirror drift、Python 版本不對(mock)、
-故意壞掉的 smoke 程式(驗證 smoke 檢查本身會大聲失敗)。
+開放後續工作:測試套件目前是「驗證輸出形狀」,不是「捏造壞環境並斷言對應檢查
+失敗」。模擬 subprocess 與 importlib 的 fixture 套件能加強回歸覆蓋。如需要,
+可開後續 ZEP 追蹤。
 
 ## 待釐清問題
 

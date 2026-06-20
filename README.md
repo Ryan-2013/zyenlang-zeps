@@ -32,7 +32,7 @@ informational) or `Final` (standards). ZEPs that propose changes are
 | [0004](ZEP-0004-global-state-and-constants.md) | Global State and Module-Level Constants | Final | Standards |
 | [0005](ZEP-0005-error-handling.md) | Error Handling Conventions | Active | Informational |
 | [0006](ZEP-0006-struct-field-defaults.md) | Struct Field Defaults | Final | Standards |
-| [0007](ZEP-0007-zy-doctor.md) | `zy doctor`: System Health Check | Draft | Standards |
+| [0007](ZEP-0007-zy-doctor.md) | `zy doctor`: System Health Check | Active | Standards |
 
 ## How to read these
 
