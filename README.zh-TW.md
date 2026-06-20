@@ -2,6 +2,10 @@
 
 [English](README.md) | **繁體中文**
 
+> **相關 repo**
+> - **編譯器 & stdlib**:[zyenlang-v0.1.49](https://github.com/Ryan-2013/zyenlang-v0.1.49)
+> - **IDE(dogfood)**:[zyenlang-ide](https://github.com/Ryan-2013/zyenlang-ide)
+
 一套小而明確的 ZyenLang 規格系統,參考 Python PEP 的設計,但只留下單作者
 + AI 協作真正用得到的部分。
 

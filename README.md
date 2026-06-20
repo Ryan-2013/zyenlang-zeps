@@ -2,6 +2,10 @@
 
 **English** | [繁體中文](README.zh-TW.md)
 
+> **Related repositories**
+> - **Compiler & stdlib**: [zyenlang-v0.1.49](https://github.com/Ryan-2013/zyenlang-v0.1.49)
+> - **IDE (dogfood)**: [zyenlang-ide](https://github.com/Ryan-2013/zyenlang-ide)
+
 A small, opinionated specification system for ZyenLang, modelled after
 Python's PEP system but stripped to what a single-author + AI-assisted
 project actually needs.
