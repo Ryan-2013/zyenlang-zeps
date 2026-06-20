@@ -30,6 +30,7 @@
 | [0004](ZEP-0004-global-state-and-constants.zh-TW.md) | 全域狀態與模組層級常數 | Final | Standards |
 | [0005](ZEP-0005-error-handling.zh-TW.md) | 錯誤處理慣例 | Active | Informational |
 | [0006](ZEP-0006-struct-field-defaults.zh-TW.md) | 結構欄位預設值 | Final | Standards |
+| [0007](ZEP-0007-zy-doctor.zh-TW.md) | `zy doctor`:系統健檢 | Draft | Standards |
 
 ## 怎麼讀
 
