@@ -31,6 +31,11 @@
 | [0005](ZEP-0005-error-handling.zh-TW.md) | 錯誤處理慣例 | Active | Informational |
 | [0006](ZEP-0006-struct-field-defaults.zh-TW.md) | 結構欄位預設值 | Final | Standards |
 | [0007](ZEP-0007-zy-doctor.zh-TW.md) | `zy doctor`:系統健檢 | Active | Standards |
+| [0008](ZEP-0008-zyenv.zh-TW.md) | `zyenv`:版本管理器 | Active | Standards |
+| [0010](ZEP-0010-first-class-functions.zh-TW.md) | 一等公民函式值 | Active | Standards |
+| [0011](ZEP-0011-struct-body-methods.zh-TW.md) | 結構體內方法定義 | Final | Standards |
+| [0013](ZEP-0013-closures.zh-TW.md) | 閉包與 Lambda Lifting | Active | Standards |
+| [0014](ZEP-0014-managed-pointers-and-arc.zh-TW.md) | 受管指標與自動參考計數 | Final | Standards |
 
 ## 怎麼讀
 
