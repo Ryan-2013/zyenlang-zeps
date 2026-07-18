@@ -36,6 +36,7 @@
 | [0011](ZEP-0011-struct-body-methods.zh-TW.md) | 結構體內方法定義 | Final | Standards |
 | [0013](ZEP-0013-closures.zh-TW.md) | 閉包與 Lambda Lifting | Active | Standards |
 | [0014](ZEP-0014-managed-pointers-and-arc.zh-TW.md) | 受管指標與自動參考計數 | Final | Standards |
+| [0015](ZEP-0015-function-cell-pointers.zh-TW.md) | 受管函式 cell 指標 | Final | Standards |
 
 ## 怎麼讀
 
