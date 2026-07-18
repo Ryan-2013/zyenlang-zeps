@@ -33,6 +33,11 @@ informational) or `Final` (standards). ZEPs that propose changes are
 | [0005](ZEP-0005-error-handling.md) | Error Handling Conventions | Active | Informational |
 | [0006](ZEP-0006-struct-field-defaults.md) | Struct Field Defaults | Final | Standards |
 | [0007](ZEP-0007-zy-doctor.md) | `zy doctor`: System Health Check | Active | Standards |
+| [0008](ZEP-0008-zyenv.md) | `zyenv`: ZyenLang Version Manager | Active | Standards |
+| [0010](ZEP-0010-first-class-functions.md) | First-Class Function Values | Active | Standards |
+| [0011](ZEP-0011-struct-body-methods.md) | Struct-Body Method Definitions | Final | Standards |
+| [0013](ZEP-0013-closures.md) | Closures and Lambda Lifting | Active | Standards |
+| [0014](ZEP-0014-managed-pointers-and-arc.md) | Managed Pointers and Automatic Reference Counting | Final | Standards |
 
 ## How to read these
 
