@@ -38,6 +38,7 @@ informational) or `Final` (standards). ZEPs that propose changes are
 | [0011](ZEP-0011-struct-body-methods.md) | Struct-Body Method Definitions | Final | Standards |
 | [0013](ZEP-0013-closures.md) | Closures and Lambda Lifting | Active | Standards |
 | [0014](ZEP-0014-managed-pointers-and-arc.md) | Managed Pointers and Automatic Reference Counting | Final | Standards |
+| [0015](ZEP-0015-function-cell-pointers.md) | Managed Function Cell Pointers | Final | Standards |
 
 ## How to read these
 
