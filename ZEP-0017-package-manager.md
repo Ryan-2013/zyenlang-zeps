@@ -11,6 +11,7 @@
 | **Type** | Standards |
 | **Created** | 2026-07-19 |
 | **Requires** | [ZEP-0008](ZEP-0008-zyenv.md) |
+| **See Also** | [ZEP-0019](ZEP-0019-native-modules-portable-toolchain.md) |
 
 ## Abstract
 
@@ -96,6 +97,12 @@ Native packages use the same public `.zlcm.h`, `.h`, and `.c` mechanism as
 or build scripts. Platform metadata uses the existing `ZLC_SOURCE_*`,
 `ZLC_HEADER_*`, `ZLC_LIB_*`, and `ZLC_CFLAG_*` declarations.
 
+Installation safety is not a native-code sandbox. Building a native package
+passes its declared sources and permitted flags to the C toolchain, and the
+resulting executable has the user's normal process permissions. Package-root
+containment, flag policy, symbol validation, compiler invocation, and explicit
+native-code acknowledgement follow [ZEP-0019](ZEP-0019-native-modules-portable-toolchain.md).
+
 Registry downloads use HTTPS and are verified against the locked SHA-256
 digest. A name/version pair is immutable after publication. Precompiled native
 binaries and install-time scripts are outside the first version.
@@ -108,4 +115,4 @@ binaries and install-time scripts are outside the first version.
 4. Authentication, ownership, publish, yank, and search.
 
 Every phase is tested on Windows, Linux, and macOS, and the portable compiler
-must not require a system Python installation.
+must not require a system Python installation or system C compiler.

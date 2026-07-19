@@ -10,7 +10,7 @@
 | **Status** | Active |
 | **Type** | Standards |
 | **Created** | 2026-06-20 |
-| **Post-History** | 2026-06-20 |
+| **Post-History** | 2026-06-20、2026-07-19 |
 
 ## 摘要
 
@@ -22,7 +22,7 @@
 
 當 `zy build` 或 `zy run` 失敗,原因幾乎都是下面其中之一:
 
-- `gcc` 不存在或不在 `PATH` 上
+- 找不到可用的內附或系統 C 編譯器
 - Python 版本低於最低需求
 - `tkinter` 缺失(只有 GUI IDE 需要)
 - 兩個 `std/` 鏡像不同步
@@ -54,8 +54,8 @@ zy doctor [-v | --verbose] [--json] [--no-runtime]
 |---|---|---|
 | `python_version` | Python 直譯器 ≥ 3.8 | **error** |
 | `tkinter` | `import tkinter` 成功 | **warning**(CLI 不用它也能跑) |
-| `cc` | `PATH` 上有 C 編譯器(優先 gcc,接受 clang) | **error** |
-| `cc_compiles` | C 編譯器能從 `int main(){return 0;}` 產生可執行檔 | **error** |
+| `cc` | 一般解析器依序找到 `ZY_CC`、內附 Zig cc、GCC、Clang 或 `cc` | **error** |
+| `cc_compiles` | 選定的 C 編譯器能從 `int main(){return 0;}` 產生可執行檔 | **error** |
 | `zy_on_path` | `zy` 指令在 `PATH` 上 | **warning**(用 `python -m zyenlang` 也行) |
 
 #### 安裝(Installation)
@@ -98,7 +98,7 @@ ZyenLang doctor — v0.1.49
 Environment
   ✓  python 3.11.5
   ✓  tkinter
-  ✓  gcc 13.2.0
+  ✓  zig cc 0.15.1 (內附)
   ✓  zy on PATH
 
 Installation
@@ -201,7 +201,7 @@ warning / error 列出修法讓使用者複製貼上。`--fix` flag 可能在後
 ### 為什麼有 smoke-run 檢查
 
 靜態檢查(檔案存在嗎?import 成功嗎?版本有達標嗎?)會漏掉細微環境問題:
-錯的 libc 版本、gcc codegen 壞掉、Windows 防毒軟體擋執行檔啟動。Smoke trio
+錯的 libc 版本、C 編譯器 codegen 壞掉、Windows 防毒軟體擋執行檔啟動。Smoke trio
 (transpile → compile → run)是唯一**端到端**走完整 pipeline 的檢查。它抓得
 到靜態檢查抓不到的東西。
 
@@ -269,6 +269,8 @@ Exit code 政策(0 / 1 / 2)是新的,但只影響明確呼叫 `zy doctor` 的腳
 - [ZEP-0005](ZEP-0005-error-handling.zh-TW.md) —— doctor exit code 遵循
   的 int-code 慣例。
 - [ZEP-0001](ZEP-0001-purpose-and-process.zh-TW.md) —— Status 定義。
+- [ZEP-0019](ZEP-0019-native-modules-portable-toolchain.zh-TW.md) —— 可攜式
+  工具鏈選擇與原生模組信任邊界。
 
 ## 版權
 

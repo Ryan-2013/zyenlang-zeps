@@ -42,6 +42,7 @@ informational) or `Final` (standards). ZEPs that propose changes are
 | [0016](ZEP-0016-structural-list-dispatch.md) | Structural List Method Dispatch | Final | Standards |
 | [0017](ZEP-0017-package-manager.md) | `zy pkg`: Package Manager | Draft | Standards |
 | [0018](ZEP-0018-pointer-postfix-and-owned-fields.md) | Pointer Postfix Precedence and Owned Struct Fields | Final | Standards |
+| [0019](ZEP-0019-native-modules-portable-toolchain.md) | Native Modules and the Portable C Toolchain | Draft | Standards |
 
 ## How to read these
 

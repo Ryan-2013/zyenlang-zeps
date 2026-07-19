@@ -10,7 +10,7 @@
 | **Status** | Active |
 | **Type** | Standards |
 | **Created** | 2026-06-20 |
-| **Post-History** | 2026-06-20 |
+| **Post-History** | 2026-06-20, 2026-07-19 |
 
 ## Abstract
 
@@ -24,7 +24,7 @@ never modifies user state.
 
 When `zy build` or `zy run` fails, the cause is almost always one of:
 
-- `gcc` missing or not on `PATH`
+- no usable bundled or system C compiler
 - Python version below the minimum
 - `tkinter` missing (only matters for the GUI IDE)
 - The two `std/` mirrors out of sync
@@ -60,8 +60,8 @@ because it is the most expensive).
 |---|---|---|
 | `python_version` | Python interpreter ≥ 3.8 | **error** |
 | `tkinter` | `import tkinter` succeeds | **warning** (CLI works without it) |
-| `cc` | A C compiler is on `PATH` (gcc preferred, clang accepted) | **error** |
-| `cc_compiles` | The C compiler produces a working `a.out` from `int main(){return 0;}` | **error** |
+| `cc` | The normal resolver finds `ZY_CC`, bundled Zig cc, GCC, Clang, or `cc`, in that order | **error** |
+| `cc_compiles` | The selected C compiler produces a working executable from `int main(){return 0;}` | **error** |
 | `zy_on_path` | The `zy` command is on `PATH` | **warning** (user may invoke via `python -m zyenlang`) |
 
 #### Installation
@@ -104,7 +104,7 @@ ZyenLang doctor — v0.1.49
 Environment
   ✓  python 3.11.5
   ✓  tkinter
-  ✓  gcc 13.2.0
+  ✓  zig cc 0.15.1 (bundled)
   ✓  zy on PATH
 
 Installation
@@ -215,7 +215,7 @@ side is battle-tested.
 ### Why the smoke-run check
 
 Static checks (file exists, import works, version meets minimum) can
-miss subtle environment problems: wrong libc version, gcc with broken
+miss subtle environment problems: wrong libc version, a C compiler with broken
 codegen, antivirus blocking executable launches on Windows. The
 smoke trio (transpile → compile → run) is the only check that
 exercises the *full pipeline end-to-end*. It catches what the static
@@ -300,6 +300,8 @@ strengthen regression coverage. Tracked as a follow-up ZEP if needed.
 - [ZEP-0005](ZEP-0005-error-handling.md) — the int-code convention
   doctor's exit codes follow.
 - [ZEP-0001](ZEP-0001-purpose-and-process.md) — status definitions.
+- [ZEP-0019](ZEP-0019-native-modules-portable-toolchain.md) — portable
+  toolchain selection and native-module trust boundary.
 
 ## Copyright
 

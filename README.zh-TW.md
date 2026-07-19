@@ -40,6 +40,7 @@
 | [0016](ZEP-0016-structural-list-dispatch.zh-TW.md) | List 結構式方法派發 | Final | Standards |
 | [0017](ZEP-0017-package-manager.zh-TW.md) | `zy pkg` 套件管理器 | Draft | Standards |
 | [0018](ZEP-0018-pointer-postfix-and-owned-fields.zh-TW.md) | Pointer 後綴優先序與 owned struct field | Final | Standards |
+| [0019](ZEP-0019-native-modules-portable-toolchain.zh-TW.md) | 原生模組與可攜式 C 工具鏈 | Draft | Standards |
 
 ## 怎麼讀
 
