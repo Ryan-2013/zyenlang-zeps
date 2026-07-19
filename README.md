@@ -40,6 +40,8 @@ informational) or `Final` (standards). ZEPs that propose changes are
 | [0014](ZEP-0014-managed-pointers-and-arc.md) | Managed Pointers and Automatic Reference Counting | Final | Standards |
 | [0015](ZEP-0015-function-cell-pointers.md) | Managed Function Cell Pointers | Final | Standards |
 | [0016](ZEP-0016-structural-list-dispatch.md) | Structural List Method Dispatch | Final | Standards |
+| [0017](ZEP-0017-package-manager.md) | `zy pkg`: Package Manager | Draft | Standards |
+| [0018](ZEP-0018-pointer-postfix-and-owned-fields.md) | Pointer Postfix Precedence and Owned Struct Fields | Final | Standards |
 
 ## How to read these
 

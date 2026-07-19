@@ -38,6 +38,8 @@
 | [0014](ZEP-0014-managed-pointers-and-arc.zh-TW.md) | 受管指標與自動參考計數 | Final | Standards |
 | [0015](ZEP-0015-function-cell-pointers.zh-TW.md) | 受管函式 cell 指標 | Final | Standards |
 | [0016](ZEP-0016-structural-list-dispatch.zh-TW.md) | List 結構式方法派發 | Final | Standards |
+| [0017](ZEP-0017-package-manager.zh-TW.md) | `zy pkg` 套件管理器 | Draft | Standards |
+| [0018](ZEP-0018-pointer-postfix-and-owned-fields.zh-TW.md) | Pointer 後綴優先序與 owned struct field | Final | Standards |
 
 ## 怎麼讀
 

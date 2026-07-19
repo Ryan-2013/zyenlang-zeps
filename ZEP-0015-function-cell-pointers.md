@@ -11,14 +11,14 @@
 | **Type** | Standards |
 | **Created** | 2026-07-18 |
 | **Requires** | [ZEP-0010](ZEP-0010-first-class-functions.md), [ZEP-0014](ZEP-0014-managed-pointers-and-arc.md) |
-| **Reference implementation** | [ZyenLang v0.1.63](https://github.com/Ryan-2013/zyenlang/releases/tag/v0.1.63) |
+| **Reference implementation** | ZyenLang compiler main after v0.1.83 |
 
 ## Abstract
 
 This ZEP defines `ptr<fn(P...)->R>` as a managed pointer to a memory cell that
 contains a first-class `ZL_Function` value. It provides pointer identity,
-`ptr<void>` erasure, checked dereference, ARC-owned function cells, and concise
-indirect calls without converting a C function pointer to `void*`.
+`ptr<void>` erasure, checked dereference, ARC-owned function cells, and
+unambiguous indirect calls without converting a C function pointer to `void*`.
 
 ## Syntax
 
@@ -28,13 +28,13 @@ fn add(a: int, b: int) -> int {
 }
 
 let pointer: ptr<fn(int,int)->int> = &add;
-print((*pointer)(20, 22));
-print(*pointer(20, 22));
+print((str)((*pointer)(20, 22)));
 ```
 
-`(*pointer)(args)` is the parenthesized form. `*pointer(args)` is equivalent
-ZyenLang shorthand. A zero-argument pointer call may therefore be written
-`*pointer()`.
+Postfix operations bind before prefix operations. A function pointer call is
+therefore always written `(*pointer)(args)`. The removed `*pointer(args)` form
+means `*(pointer(args))`; because a `ptr<fn(...)>` is not directly callable,
+the compiler rejects it and suggests the parenthesized spelling.
 
 ## Storage
 
@@ -53,7 +53,8 @@ destructor. Copies of the pointer follow ZEP-0014 ARC rules.
 ```zy
 let opaque: ptr<void> = pointer;
 let restored: ptr<fn(int,int)->int> = (ptr<fn(int,int)->int>)opaque;
-print(*(ptr<fn(int,int)->int>)opaque(12, 10));
+print((str)((*restored)(12, 10)));
+print((str)((*(ptr<fn(int,int)->int>)opaque)(12, 10)));
 ```
 
 Erasure preserves the address, owner, ownership state, and runtime type tag.
@@ -75,6 +76,16 @@ fn add1() -> fn()->fn(int,int)->int {
 
 `add1` has type `fn()->fn()->fn(int,int)->int`, while `add1()` has type
 `fn()->fn(int,int)->int`. The compiler does not insert an implicit call.
+
+A pointer consumes exactly one dereference layer:
+
+```zy
+let *factory_ptr: ptr<fn()->fn(int,int)->int> = add2;
+print((str)((*factory_ptr)()(20, 22)));
+```
+
+`(**factory_ptr)` is invalid because `*factory_ptr` is already a function
+value. Double dereference requires `ptr<ptr<fn()->fn(int,int)->int>>`.
 
 ## C ABI
 

@@ -11,7 +11,7 @@
 | **類型** | Standards |
 | **建立日期** | 2026-07-18 |
 | **依賴** | [ZEP-0010](ZEP-0010-first-class-functions.zh-TW.md)、[ZEP-0014](ZEP-0014-managed-pointers-and-arc.zh-TW.md) |
-| **參考實作** | [ZyenLang v0.1.63](https://github.com/Ryan-2013/zyenlang/releases/tag/v0.1.63) |
+| **參考實作** | ZyenLang compiler main（v0.1.83 之後） |
 
 ## 摘要
 
@@ -28,12 +28,12 @@ fn add(a: int, b: int) -> int {
 }
 
 let pointer: ptr<fn(int,int)->int> = &add;
-print((*pointer)(20, 22));
-print(*pointer(20, 22));
+print((str)((*pointer)(20, 22)));
 ```
 
-`(*pointer)(args)` 是加括號形式；`*pointer(args)` 是等價的 ZyenLang 簡寫。
-因此零參數函式指標可以寫成 `*pointer()`。
+後綴運算會先於前綴運算結合，因此函式指標固定寫成
+`(*pointer)(args)`。已移除的 `*pointer(args)` 代表 `*(pointer(args))`；
+`ptr<fn(...)>` 本身不能直接呼叫，所以編譯器會拒絕並提示補上括號。
 
 ## 儲存與所有權
 
@@ -52,7 +52,8 @@ pointer 複製遵守 ZEP-0014 的 ARC 規則。
 ```zy
 let opaque: ptr<void> = pointer;
 let restored: ptr<fn(int,int)->int> = (ptr<fn(int,int)->int>)opaque;
-print(*(ptr<fn(int,int)->int>)opaque(12, 10));
+print((str)((*restored)(12, 10)));
+print((str)((*(ptr<fn(int,int)->int>)opaque)(12, 10)));
 ```
 
 擦除不改變 address、owner、ownership state 或 runtime type tag。還原需要顯式
@@ -74,6 +75,16 @@ fn add1() -> fn()->fn(int,int)->int {
 
 `add1` 的型別是 `fn()->fn()->fn(int,int)->int`；`add1()` 才是
 `fn()->fn(int,int)->int`。編譯器不會偷偷插入一次函式呼叫。
+
+一個 `*` 只消耗一層 pointer：
+
+```zy
+let *factory_ptr: ptr<fn()->fn(int,int)->int> = add2;
+print((str)((*factory_ptr)()(20, 22)));
+```
+
+`(**factory_ptr)` 無效，因為 `*factory_ptr` 已經是函式值。要使用兩次
+解參考，型別必須是 `ptr<ptr<fn()->fn(int,int)->int>>`。
 
 ## C ABI
 
