@@ -7,7 +7,8 @@
 | **ZEP** | 0017 |
 | **Title** | `zy pkg`: Package Manager |
 | **Authors** | zuenchen, OpenAI Codex |
-| **Status** | Draft |
+| **Status** | Superseded |
+| **Superseded By** | [ZEP-0021](ZEP-0021-projects-and-artifacts.md) |
 | **Type** | Standards |
 | **Created** | 2026-07-19 |
 | **Requires** | [ZEP-0008](ZEP-0008-zyenv.md) |

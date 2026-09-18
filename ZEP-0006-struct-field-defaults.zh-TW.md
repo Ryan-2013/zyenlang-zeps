@@ -7,7 +7,8 @@
 | **ZEP** | 0006 |
 | **Title** | Struct Field Defaults |
 | **Author** | zuenchen, Claude Opus 4.7 |
-| **Status** | Final |
+| **Status** | Superseded |
+| **取代者** | [ZEP-0020](ZEP-0020-v0.3-core-language.zh-TW.md) |
 | **Type** | Standards |
 | **Created** | 2026-06-20 |
 | **Post-History** | 2026-06-20 |

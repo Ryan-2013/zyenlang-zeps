@@ -7,7 +7,8 @@
 | **ZEP** | 0017 |
 | **標題** | `zy pkg` 套件管理器 |
 | **作者** | zuenchen、OpenAI Codex |
-| **狀態** | Draft |
+| **狀態** | Superseded |
+| **取代者** | [ZEP-0021](ZEP-0021-projects-and-artifacts.zh-TW.md) |
 | **類型** | Standards |
 | **建立日期** | 2026-07-19 |
 | **依賴** | [ZEP-0008](ZEP-0008-zyenv.zh-TW.md) |

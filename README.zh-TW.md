@@ -3,8 +3,10 @@
 [English](README.md) | **繁體中文**
 
 > **相關 repo**
-> - **編譯器 & stdlib**:[zyenlang-v0.1.49](https://github.com/Ryan-2013/zyenlang-v0.1.49)
-> - **IDE(dogfood)**:[zyenlang-ide](https://github.com/Ryan-2013/zyenlang-ide)
+> - **編譯器、runtime、stdlib 與 VS Code 支援**：[zyenlang](https://github.com/Ryan-2013/zyenlang)
+
+ZyenLang 0.3 是不相容升級。ZEP-0020 到 ZEP-0022 是 0.3 的正式規格；標為
+`Superseded` 的文件只保留設計歷史，不代表目前語法。
 
 一套小而明確的 ZyenLang 規格系統,參考 Python PEP 的設計,但只留下單作者
 + AI 協作真正用得到的部分。
@@ -29,23 +31,26 @@
 | [0003](ZEP-0003-style-guide.zh-TW.md) | ZyenLang 風格指南 | Active | Informational |
 | [0004](ZEP-0004-global-state-and-constants.zh-TW.md) | 全域狀態與模組層級常數 | Final | Standards |
 | [0005](ZEP-0005-error-handling.zh-TW.md) | 錯誤處理慣例 | Active | Informational |
-| [0006](ZEP-0006-struct-field-defaults.zh-TW.md) | 結構欄位預設值 | Final | Standards |
+| [0006](ZEP-0006-struct-field-defaults.zh-TW.md) | 結構欄位預設值 | Superseded | Standards |
 | [0007](ZEP-0007-zy-doctor.zh-TW.md) | `zy doctor`:系統健檢 | Active | Standards |
 | [0008](ZEP-0008-zyenv.zh-TW.md) | `zyenv`:版本管理器 | Active | Standards |
-| [0010](ZEP-0010-first-class-functions.zh-TW.md) | 一等公民函式值 | Active | Standards |
-| [0011](ZEP-0011-struct-body-methods.zh-TW.md) | 結構體內方法定義 | Final | Standards |
-| [0013](ZEP-0013-closures.zh-TW.md) | 閉包與 Lambda Lifting | Active | Standards |
-| [0014](ZEP-0014-managed-pointers-and-arc.zh-TW.md) | 受管指標與自動參考計數 | Final | Standards |
-| [0015](ZEP-0015-function-cell-pointers.zh-TW.md) | 受管函式 cell 指標 | Final | Standards |
-| [0016](ZEP-0016-structural-list-dispatch.zh-TW.md) | List 結構式方法派發 | Final | Standards |
-| [0017](ZEP-0017-package-manager.zh-TW.md) | `zy pkg` 套件管理器 | Draft | Standards |
-| [0018](ZEP-0018-pointer-postfix-and-owned-fields.zh-TW.md) | Pointer 後綴優先序與 owned struct field | Final | Standards |
-| [0019](ZEP-0019-native-modules-portable-toolchain.zh-TW.md) | 原生模組與可攜式 C 工具鏈 | Draft | Standards |
+| [0010](ZEP-0010-first-class-functions.zh-TW.md) | 一等公民函式值 | Superseded | Standards |
+| [0011](ZEP-0011-struct-body-methods.zh-TW.md) | 結構體內方法定義 | Superseded | Standards |
+| [0013](ZEP-0013-closures.zh-TW.md) | 閉包與 Lambda Lifting | Superseded | Standards |
+| [0014](ZEP-0014-managed-pointers-and-arc.zh-TW.md) | 受管指標與自動參考計數 | Superseded | Standards |
+| [0015](ZEP-0015-function-cell-pointers.zh-TW.md) | 受管函式 cell 指標 | Superseded | Standards |
+| [0016](ZEP-0016-structural-list-dispatch.zh-TW.md) | List 結構式方法派發 | Superseded | Standards |
+| [0017](ZEP-0017-package-manager.zh-TW.md) | `zy pkg` 套件管理器 | Superseded | Standards |
+| [0018](ZEP-0018-pointer-postfix-and-owned-fields.zh-TW.md) | Pointer 後綴優先序與 owned struct field | Superseded | Standards |
+| [0019](ZEP-0019-native-modules-portable-toolchain.zh-TW.md) | 原生模組與可攜式 C 工具鏈 | Superseded | Standards |
+| [0020](ZEP-0020-v0.3-core-language.zh-TW.md) | ZyenLang 0.3 核心語言模型 | Final | Standards |
+| [0021](ZEP-0021-projects-and-artifacts.zh-TW.md) | 專案、依賴與產物 target | Final | Standards |
+| [0022](ZEP-0022-native-compatibility-abi.zh-TW.md) | 原生相容層與 C ABI v2 | Final | Standards |
 
 ## 怎麼讀
 
-剛接觸 ZyenLang 的人請照順序讀:0001 講系統本身,0002 給你看 ZEP 長怎樣,
-0003 是日常風格,0004 解釋為什麼不能有頂層變數,0005 是錯誤怎麼穿過 stdlib。
+要了解目前語言，先讀 ZEP-0020、ZEP-0021、ZEP-0022。較舊文件記錄設計歷史；
+標為 `Superseded` 的規則不屬於 ZyenLang 0.3。
 
 要寫新 ZEP,複製 `ZEP-0002-zep-template.md`,編號往下推,提交。
 
@@ -53,7 +58,7 @@
 
 - Bug 回報 —— 放在編譯器 repo 的 `docs/`。
 - 個別模組 API 文件 —— 放在 `docs/std_<module>.md`。
-- 變更日誌與版本筆記 —— 放在 `SPEC_v0_1.md` 和 release notes。
+- 變更日誌與版本筆記 —— 放在編譯器 repo。
 
 ZEP 紀錄的是**設計原則**和**長期慣例**。如果一條規則在 README 用一行就講完了,
 就不需要寫 ZEP。

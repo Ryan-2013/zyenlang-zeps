@@ -7,7 +7,8 @@
 | **ZEP** | 0013 |
 | **標題** | 閉包與 Lambda Lifting |
 | **作者** | zuenchen、Claude Opus 4.7 |
-| **狀態** | Active |
+| **狀態** | Superseded |
+| **取代者** | [ZEP-0020](ZEP-0020-v0.3-core-language.zh-TW.md) |
 | **類型** | Standards |
 | **建立日期** | 2026-06-21 |
 | **修訂歷史** | 2026-06-21 |

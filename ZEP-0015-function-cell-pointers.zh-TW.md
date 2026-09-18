@@ -7,7 +7,8 @@
 | **ZEP** | 0015 |
 | **標題** | 受管函式 cell 指標 |
 | **作者** | zuenchen、OpenAI Codex |
-| **狀態** | Final |
+| **狀態** | Superseded |
+| **取代者** | [ZEP-0020](ZEP-0020-v0.3-core-language.zh-TW.md) |
 | **類型** | Standards |
 | **建立日期** | 2026-07-18 |
 | **依賴** | [ZEP-0010](ZEP-0010-first-class-functions.zh-TW.md)、[ZEP-0014](ZEP-0014-managed-pointers-and-arc.zh-TW.md) |

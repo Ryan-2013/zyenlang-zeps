@@ -7,7 +7,8 @@
 | **ZEP** | 0014 |
 | **標題** | 受管指標與自動參考計數 |
 | **作者** | zuenchen、OpenAI Codex |
-| **狀態** | Final |
+| **狀態** | Superseded |
+| **取代者** | [ZEP-0020](ZEP-0020-v0.3-core-language.zh-TW.md) |
 | **類型** | Standards |
 | **建立日期** | 2026-07-18 |
 | **依賴** | [ZEP-0010](ZEP-0010-first-class-functions.zh-TW.md)、[ZEP-0013](ZEP-0013-closures.zh-TW.md) |

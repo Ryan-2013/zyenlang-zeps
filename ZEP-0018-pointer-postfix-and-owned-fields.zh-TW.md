@@ -7,7 +7,8 @@
 | **ZEP** | 0018 |
 | **標題** | Pointer 後綴優先序與 owned struct field |
 | **作者** | zuenchen、OpenAI Codex |
-| **狀態** | Final |
+| **狀態** | Superseded |
+| **取代者** | [ZEP-0020](ZEP-0020-v0.3-core-language.zh-TW.md) |
 | **類型** | Standards |
 | **建立日期** | 2026-07-19 |
 | **依賴** | [ZEP-0014](ZEP-0014-managed-pointers-and-arc.zh-TW.md)、[ZEP-0015](ZEP-0015-function-cell-pointers.zh-TW.md) |

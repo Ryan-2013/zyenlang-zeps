@@ -7,7 +7,8 @@
 | **ZEP** | 0013 |
 | **Title** | Closures and Lambda Lifting |
 | **Author** | zuenchen, Claude Opus 4.7 |
-| **Status** | Active |
+| **Status** | Superseded |
+| **Superseded By** | [ZEP-0020](ZEP-0020-v0.3-core-language.md) |
 | **Type** | Standards |
 | **Created** | 2026-06-21 |
 | **Post-History** | 2026-06-21 |

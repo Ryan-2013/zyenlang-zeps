@@ -7,7 +7,8 @@
 | **ZEP** | 0019 |
 | **Title** | Native Modules and the Portable C Toolchain |
 | **Authors** | zuenchen, OpenAI Codex |
-| **Status** | Draft |
+| **Status** | Superseded |
+| **Superseded By** | [ZEP-0022](ZEP-0022-native-compatibility-abi.md) |
 | **Type** | Standards |
 | **Created** | 2026-07-19 |
 | **See Also** | [ZEP-0007](ZEP-0007-zy-doctor.md), [ZEP-0017](ZEP-0017-package-manager.md) |

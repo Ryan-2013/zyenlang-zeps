@@ -7,7 +7,8 @@
 | **ZEP** | 0019 |
 | **標題** | 原生模組與可攜式 C 工具鏈 |
 | **作者** | zuenchen、OpenAI Codex |
-| **狀態** | Draft |
+| **狀態** | Superseded |
+| **取代者** | [ZEP-0022](ZEP-0022-native-compatibility-abi.zh-TW.md) |
 | **類型** | Standards |
 | **建立日期** | 2026-07-19 |
 | **相關規格** | [ZEP-0007](ZEP-0007-zy-doctor.zh-TW.md)、[ZEP-0017](ZEP-0017-package-manager.zh-TW.md) |

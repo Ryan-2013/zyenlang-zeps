@@ -7,7 +7,8 @@
 | **ZEP** | 0016 |
 | **標題** | List 結構式方法派發 |
 | **作者** | zuenchen、OpenAI Codex |
-| **狀態** | Final |
+| **狀態** | Superseded |
+| **取代者** | [ZEP-0020](ZEP-0020-v0.3-core-language.zh-TW.md) |
 | **類型** | Standards |
 | **建立日期** | 2026-07-18 |
 | **依賴** | [ZEP-0011](ZEP-0011-struct-body-methods.zh-TW.md)、[ZEP-0014](ZEP-0014-managed-pointers-and-arc.zh-TW.md) |

@@ -7,7 +7,8 @@
 | **ZEP** | 0016 |
 | **Title** | Structural List Method Dispatch |
 | **Authors** | zuenchen, OpenAI Codex |
-| **Status** | Final |
+| **Status** | Superseded |
+| **Superseded By** | [ZEP-0020](ZEP-0020-v0.3-core-language.md) |
 | **Type** | Standards |
 | **Created** | 2026-07-18 |
 | **Requires** | [ZEP-0011](ZEP-0011-struct-body-methods.md), [ZEP-0014](ZEP-0014-managed-pointers-and-arc.md) |

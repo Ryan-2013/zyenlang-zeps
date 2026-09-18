@@ -7,7 +7,8 @@
 | **ZEP** | 0018 |
 | **Title** | Pointer Postfix Precedence and Owned Struct Fields |
 | **Authors** | zuenchen, OpenAI Codex |
-| **Status** | Final |
+| **Status** | Superseded |
+| **Superseded By** | [ZEP-0020](ZEP-0020-v0.3-core-language.md) |
 | **Type** | Standards |
 | **Created** | 2026-07-19 |
 | **Requires** | [ZEP-0014](ZEP-0014-managed-pointers-and-arc.md), [ZEP-0015](ZEP-0015-function-cell-pointers.md) |
