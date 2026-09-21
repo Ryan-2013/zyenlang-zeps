@@ -42,6 +42,10 @@ zy emit --file SOURCE --kind c --out-dir PATH [--output-name NAME]
 `zy build source.zy -o output` 已移除，因為副檔名不可決定 artifact kind；明確的
 非專案 C 輸出使用 `zy emit`。
 
+`zy run` 執行 project binary 時以 project root 作為 working directory，因此相對
+filesystem path 不受啟動命令的 shell 位置影響。`zy test` 與 compiler 單檔執行則
+使用 entry source file 所在目錄。
+
 ## Manifest 與 target
 
 Manifest 名為 `zyproject.toml`：

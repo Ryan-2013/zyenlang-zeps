@@ -45,6 +45,11 @@ inspection. Single-file `zy build source.zy -o output` is removed because an
 extension must never select the artifact kind. `zy emit` is the explicit
 non-project C-source operation.
 
+`zy run` executes a project binary with the project root as its working
+directory, so relative filesystem paths are independent of the shell location
+that invoked the command. `zy test` and compiler single-file execution use the
+entry source file's directory.
+
 ## Manifest and targets
 
 The manifest is `zyproject.toml`:
