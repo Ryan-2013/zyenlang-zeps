@@ -157,6 +157,13 @@ implicit process-global target. The current Raylib compatibility layer permits
 one open Application per process and rejects a concurrent second open. ARC
 cleanup of the final Application reference closes a still-open native session.
 
+The source API is backend-neutral and exposes no Raylib handle. Raylib is the
+initial compatibility implementation, not a source-level contract. The next
+native backend target is SDL3 for windowing, events, text input/IME, and audio,
+with SDL_GPU for rendering. Optional Dear ImGui tooling may live behind this
+boundary; application code continues to use the retained Application/widget
+API.
+
 ## Validation and trust
 
 The compiler rejects unknown/malformed macros, duplicate names, invalid C

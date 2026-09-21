@@ -144,6 +144,11 @@ widget 繪製會回傳錯誤，不會改用隱含的 process-global target。目
 相容層每個 process 只允許一個已開啟的 Application，第二個同時 open 會被拒絕。
 最後一個 Application reference 的 ARC cleanup 會關閉仍開啟的 native session。
 
+Source API 必須保持 backend-neutral，不暴露 Raylib handle。Raylib 是初始相容
+實作，不是 source-level contract。下一個 native backend 目標為 SDL3 的 window、
+event、text input/IME 與 audio，加上 SDL_GPU rendering。可選的 Dear ImGui 工具可
+位於此 boundary 後方；application code 繼續使用 retained Application/widget API。
+
 ## 驗證與信任
 
 編譯器拒絕未知或 malformed macro、重複名稱、非法 C identifier、不支援或遞迴

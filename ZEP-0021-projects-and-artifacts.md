@@ -18,15 +18,19 @@
 
 ZyenLang 0.3 integrates project creation, dependency locking, target
 selection, output placement, and safe cleanup into the flat `zy` command. The
-old `zy pkg` family is removed. The first resolver supports local paths and Git
-repositories pinned to exact revisions; it deliberately has no registry or
-build-script execution.
+old `zy pkg` family is removed. The resolver supports registry entries, local
+paths, and Git repositories pinned to exact revisions. It never executes a
+dependency build or install script.
 
 ## Commands
 
 ```text
 zy new PATH [--lib]
 zy init [PATH] [--lib]
+zy install [NAME[==VERSION] | PATH | git+URL@COMMIT] [--alias ALIAS]
+zy uninstall ALIAS
+zy list
+zy show NAME
 zy add ALIAS --path PATH
 zy add ALIAS --git URL --rev COMMIT
 zy remove ALIAS
@@ -45,6 +49,10 @@ inspection. Single-file `zy build source.zy -o output` is removed because an
 extension must never select the artifact kind. `zy emit` is the explicit
 non-project C-source operation.
 
+`zy install` without a requirement resolves the current manifest. With a
+requirement it adds and locks a dependency. `zy add`, `zy remove`, and
+`zy fetch` remain lower-level compatibility commands.
+
 `zy run` executes a project binary with the executable output directory as its
 working directory. Standard filesystem operations resolve relative paths from
 the executable directory even when a built binary is launched from another
@@ -59,6 +67,7 @@ The manifest is `zyproject.toml`:
 name = "zy-math"
 version = "0.3.0"
 zyen = ">=0.3.0"
+entry = "src/lib.zy"
 
 [build]
 default-target = "ffi"
@@ -101,10 +110,14 @@ facade.
 
 A dependency key is its import alias. A path dependency resolves from the
 owning manifest. A Git dependency requires an exact revision and records the
-resolved commit. A package may import only its direct dependencies:
+resolved commit. Importing a dependency alias loads its manifest entry, while
+additional `::` segments load source submodules. `as` is optional and defaults
+to the final path component. A package may import only its direct dependencies:
 
 ```zy
+import utils
 import utils::math as math
+let version = utils::version()
 let answer = math::add(20, 22)
 ```
 
@@ -122,6 +135,14 @@ content-mismatched lock instead of changing it silently.
 Package snapshots are immutable and content addressed under
 `~/.zyen/packages/0.3/<sha256>/`. Git source checkouts are stored below
 `~/.zyen/git/0.3/` after their repository metadata is removed.
+
+Registry schema 1 is a bounded JSON index. A package entry has a `latest`
+version and a map of exact versions to validated Git URLs and full commits.
+`zy install name` selects `latest`; `zy install name==version` selects an exact
+version. The fetched manifest name/version must match the index. The default
+index is HTTPS; `ZYEN_REGISTRY` may select another HTTPS URL or a local index
+for private/offline use. Registry data never supplies shell commands or
+compiler flags directly.
 
 ## Tests and metadata
 
@@ -146,5 +167,5 @@ SHA-256 digests make inputs reproducible and detect drift; they do not make
 native dependency code safe. Building or running a package trusts its native
 C inputs with the current process privileges.
 
-0.3 has no registry, semver range solver, publishing, build scripts,
+0.3 has no semver range solver, automated publishing service, build scripts,
 dependency hooks, prebuilt native package format, or re-export.

@@ -17,14 +17,19 @@
 ## 摘要
 
 ZyenLang 0.3 把專案建立、依賴鎖定、target 選擇、輸出位置與安全清理整合進
-扁平的 `zy` 命令。舊 `zy pkg` 命令族已移除。第一版 resolver 支援 local path
-與鎖定精確 revision 的 Git repository，不提供 registry 或 build script 執行。
+扁平的 `zy` 命令。舊 `zy pkg` 命令族已移除。resolver 支援 registry entry、
+local path 與鎖定精確 revision 的 Git repository，且不執行 dependency build
+或 install script。
 
 ## 命令
 
 ```text
 zy new PATH [--lib]
 zy init [PATH] [--lib]
+zy install [NAME[==VERSION] | PATH | git+URL@COMMIT] [--alias ALIAS]
+zy uninstall ALIAS
+zy list
+zy show NAME
 zy add ALIAS --path PATH
 zy add ALIAS --git URL --rev COMMIT
 zy remove ALIAS
@@ -42,6 +47,9 @@ zy emit --file SOURCE --kind c --out-dir PATH [--output-name NAME]
 `zy build source.zy -o output` 已移除，因為副檔名不可決定 artifact kind；明確的
 非專案 C 輸出使用 `zy emit`。
 
+`zy install` 不帶 requirement 時解析目前 manifest；帶 requirement 時新增並
+鎖定 dependency。`zy add`、`zy remove`、`zy fetch` 保留為低階相容命令。
+
 `zy run` 執行 project binary 時以 executable output directory 作為 working
 directory。標準 filesystem operation 即使從其他 working directory 啟動已建置的
 binary，也一律從 executable directory 解析相對 path。
@@ -55,6 +63,7 @@ Manifest 名為 `zyproject.toml`：
 name = "zy-math"
 version = "0.3.0"
 zyen = ">=0.3.0"
+entry = "src/lib.zy"
 
 [build]
 default-target = "ffi"
@@ -93,11 +102,15 @@ target key。artifact kind 不由檔名副檔名推測。
 ## 依賴圖與 import
 
 dependency key 就是 import alias。path dependency 相對擁有它的 manifest 解析；
-Git dependency 必須指定精確 revision，lock 會保存 resolved commit。package 只可
-import 自己的 direct dependency：
+Git dependency 必須指定精確 revision，lock 會保存 resolved commit。只 import
+dependency alias 時載入其 manifest entry；額外 `::` segment 解析 source
+submodule。`as` 可省略，預設使用 path 最後一段。package 只可 import 自己的
+direct dependency：
 
 ```zy
+import utils
 import utils::math as math
+let version = utils::version()
 let answer = math::add(20, 22)
 ```
 
@@ -112,6 +125,13 @@ dependency cycle、alias collision、不安全名稱、可變 Git revision 語�
 
 Package snapshot 以內容雜湊保存在 `~/.zyen/packages/0.3/<sha256>/`；Git source
 移除 repository metadata 後保存在 `~/.zyen/git/0.3/`。
+
+Registry schema 1 是有大小限制的 JSON index。package entry 包含 `latest`
+version，以及 exact version 到已驗證 Git URL 與完整 commit 的 mapping。
+`zy install name` 選擇 `latest`，`zy install name==version` 選擇指定版本；取得的
+manifest name/version 必須和 index 相符。預設 index 使用 HTTPS；私人或離線環境
+可用 `ZYEN_REGISTRY` 指定另一個 HTTPS URL 或 local index。Registry data 不可直接
+提供 shell command 或 compiler flag。
 
 ## Test、metadata 與安全 clean
 
@@ -129,5 +149,5 @@ fetch dependency 不會執行 source 或 install hook。精確 revision 與 SHA-
 digest 提供可重現性及漂移偵測，不代表 native dependency 安全；build/run 會以
 目前 process 權限信任其 C input。
 
-0.3 不提供 registry、semver range solver、publish、build script、dependency
+0.3 不提供 semver range solver、自動 publish service、build script、dependency
 hook、prebuilt native package format 或 re-export。
