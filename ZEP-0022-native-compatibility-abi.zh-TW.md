@@ -132,6 +132,18 @@ runtime/ABI header、宣告的 native source/local header，以及描述 source�
 include/lib path、flag、library、export 的 metadata。static/shared target 編譯同一組
 input。
 
+## 原生 GUI 所有權
+
+`std::gui::Application` 是原生視窗 session 的公開 owner。Retained widget 必須
+透過該 instance 建立，例如 `app.label(...)`、`app.button(...)` 與
+`app.column(...)`。每個 widget 都會 retain 自己的 Application，`draw()` 只會
+繪製到該 Application。不存在 `gui::label(...)` 這類脫離 owner 的 module factory。
+
+Raw drawing operation 同樣是 Application method。Application 關閉後再透過其
+widget 繪製會回傳錯誤，不會改用隱含的 process-global target。目前的 Raylib
+相容層每個 process 只允許一個已開啟的 Application，第二個同時 open 會被拒絕。
+最後一個 Application reference 的 ARC cleanup 會關閉仍開啟的 native session。
+
 ## 驗證與信任
 
 編譯器拒絕未知或 malformed macro、重複名稱、非法 C identifier、不支援或遞迴

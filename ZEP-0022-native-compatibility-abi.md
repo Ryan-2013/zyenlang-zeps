@@ -143,6 +143,20 @@ A `c-source` target emits generated source, a C11/C++ header using
 and metadata describing sources, headers, include/library paths, flags,
 libraries, and exports. Static/shared targets compile the same inputs.
 
+## Native GUI ownership
+
+`std::gui::Application` is the public owner of a native window session.
+Retained widgets are created through that instance, for example
+`app.label(...)`, `app.button(...)`, and `app.column(...)`. Each widget retains
+its Application and its `draw()` operation targets only that Application.
+Detached module factories such as `gui::label(...)` do not exist.
+
+Raw drawing operations are likewise Application methods. Drawing through a
+widget after its Application has closed returns an error instead of using an
+implicit process-global target. The current Raylib compatibility layer permits
+one open Application per process and rejects a concurrent second open. ARC
+cleanup of the final Application reference closes a still-open native session.
+
 ## Validation and trust
 
 The compiler rejects unknown/malformed macros, duplicate names, invalid C
